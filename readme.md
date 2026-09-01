@@ -8,6 +8,8 @@ E2E testovacia sada pre e-commerce funkcionalitu [automationteststore.com](https
 
 ## Inštalácia
 
+- Node.js v20+ odporúčané
+
 ```bash
 npm install
 npx playwright install --with-deps
