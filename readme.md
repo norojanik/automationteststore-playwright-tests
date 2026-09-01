@@ -1,4 +1,4 @@
-# AutomationTestStore Playwright Tests
+# Playwright Tests for Automation TestStore 
 
 E2E testovacia sada pre e-commerce funkcionalitu [automationteststore.com](https://automationteststore.com)
 
