@@ -1,8 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 import dotenv from "dotenv";
 
-dotenv.config({ path: `./env/.env.${process.env.NODE_ENV || "prod"}` });
-
+dotenv.config({ path: `./env/.env.${process.env.NODE_ENV || "prod"}`, quiet: true });
 export default defineConfig({
   testDir: "./tests",
   timeout: 60000,
