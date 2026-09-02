@@ -6,7 +6,7 @@ import { priceTextToNumber, roundToCents } from "../support/priceUtils";
 import { CategoryPage } from "../pages/CategoryPage";
 
 test.describe("Cart with multiple items", () => {
-  test.only("manages quantities and removal across multiple cart items", async ({ page }) => {
+  test("manages quantities and removal across multiple cart items", async ({ page }) => {
     const productPage = new ProductPage(page);
     const cartPage = new CartPage(page);
     const categoryPage = new CategoryPage(page);
