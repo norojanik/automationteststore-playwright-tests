@@ -20,13 +20,13 @@ npx playwright install --with-deps
 ```bash
 npm test                 # všetky testy
 npm run test:headed      # s viditeľným prehliadačom
-npm run test:debug       # krokovací debug režim
+npm run test:debug       # debug režim
 npm run report           # otvorí posledný HTML report
 ```
 
 ## Štruktúra projektu
 - `pages/` — Page Object Model
-- `support/` — testové dáta a pomocné funkcie
+- `support/` — testovacie dáta a pomocné funkcie
 - `tests/` — 5 testovacích scenárov (01–05)
 
 ## Známa nezrovnalosť v zadaní
