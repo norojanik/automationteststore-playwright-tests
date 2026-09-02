@@ -12,13 +12,12 @@ test.describe("Search and purchase flow", () => {
 
     await test.step("Search for the product and open it from the results", async () => {
       await page.goto("/");
-      await page.locator("#filter_keyword").fill(TEST_PRODUCTS.first.name);
-      await page.locator(".button-in-search").click();
+      await productPage.searchInput.fill(TEST_PRODUCTS.first.name);
+      await productPage.searchSubmitButton.click();
     });
 
     await test.step("Verify the product details - name, price", async () => {
-      const nameHeading = page.locator("h1.productname");
-      await expect(nameHeading).toBeVisible();
+      await expect(productPage.nameHeading).toBeVisible();
 
       productName = await productPage.getName();
       expect(productName).toBe(TEST_PRODUCTS.first.name);

@@ -3,13 +3,10 @@ import { NEGATIVE_SEARCH_TERM, NO_RESULTS_MESSAGE } from "../support/testData";
 import { BasePage } from "../pages/BasePage";
 
 test.describe("Negative search scenario", () => {
-  test("shows no results and no stale products for a nonsense search term", async ({
-    page,
-  }) => {
+  test("shows no results and no stale products for a nonsense search term", async ({ page }) => {
+    const basePage = new BasePage(page);
     const resultLinks = page.locator("div.thumbnails.grid a.prdocutname");
     const noResultsMessage = page.getByText(NO_RESULTS_MESSAGE);
-    const breadcrumbLinks = page.locator("ul.breadcrumb li a");
-    const basePage = new BasePage(page);
     let previousResultNames: string[] = [];
 
     await test.step("Search for a real term first, to have prior results to clear later", async () => {
@@ -35,7 +32,7 @@ test.describe("Negative search scenario", () => {
     });
 
     await test.step("Verify the page layout is still consitent", async () => {
-      await expect(breadcrumbLinks.first()).toBeVisible();
+      await expect(basePage.breadcrumbLinks.first()).toBeVisible();
       await expect(page.locator("ul.nav-pills.categorymenu")).toBeVisible();
     });
   });

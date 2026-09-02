@@ -3,19 +3,20 @@ import { ProductPage } from "../pages/ProductPage";
 import { CartPage } from "../pages/CartPage";
 import { TEST_PRODUCTS } from "../support/testData";
 import { priceTextToNumber, roundToCents } from "../support/priceUtils";
+import { CategoryPage } from "../pages/CategoryPage";
 
 test.describe("Cart with multiple items", () => {
-  test("manages quantities and removal across multiple cart items", async ({ page }) => {
+  test.only("manages quantities and removal across multiple cart items", async ({ page }) => {
     const productPage = new ProductPage(page);
     const cartPage = new CartPage(page);
+    const categoryPage = new CategoryPage(page);
 
-    const productLinks = page.locator("div.thumbnails.grid a.prdocutname");
     const prices: Record<string, string> = {};
 
     await test.step("Add two different products to the cart", async () => {
       for (const product of [TEST_PRODUCTS.first, TEST_PRODUCTS.second]) {
         await page.goto(`/index.php?rt=product/category&path=${product.categoryPath}`);
-        await productLinks.filter({ hasText: product.name }).first().click();
+        await categoryPage.productLinks.filter({ hasText: product.name }).first().click();
 
         await expect(productPage.nameHeading).toBeVisible();
         prices[product.name] = await productPage.getPrice();
@@ -43,7 +44,7 @@ test.describe("Cart with multiple items", () => {
       const updatedFirstItem = await cartPage.getItem(TEST_PRODUCTS.first.name);
       expect(updatedFirstItem.quantity).toBe(String(newQuantity));
       expect(priceTextToNumber(updatedFirstItem.total)).toBe(
-        roundToCents(priceTextToNumber(updatedFirstItem.unitPrice) * newQuantity)
+        roundToCents(priceTextToNumber(updatedFirstItem.unitPrice) * newQuantity),
       );
     });
 
