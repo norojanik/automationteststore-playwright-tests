@@ -21,7 +21,8 @@ export class CartPage extends BasePage {
   }
 
   private rowByName(name: string): Locator {
-    return this.itemRows.filter({ has: this.page.locator("td.align_left a", { hasText: name }) });
+    const exact = new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`);
+    return this.itemRows.filter({ has: this.page.locator("td.align_left a", { hasText: exact }) });
   }
 
   async getItemCount(): Promise<number> {
