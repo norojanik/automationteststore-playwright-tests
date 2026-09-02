@@ -4,7 +4,7 @@ import { BasePage } from "./BasePage";
 export class CategoryPage extends BasePage {
   readonly productLinks = this.page.locator("div.thumbnails.grid a.prdocutname");
   readonly productPrices = this.page.locator(
-    "div.thumbnails.grid .price .pricenew, div.thumbnails.grid .price .oneprice"
+    "div.thumbnails.grid .price .pricenew, div.thumbnails.grid .price .oneprice",
   );
   readonly sortSelect = this.page.locator("#sort");
 
@@ -27,6 +27,7 @@ export class CategoryPage extends BasePage {
   async sortBy(optionLabel: string): Promise<void> {
     await this.sortSelect.selectOption({ label: optionLabel });
     await this.page.waitForURL(/sort=/);
+    await this.page.waitForLoadState("networkidle");
   }
 
   async openProductAt(index: number): Promise<void> {
